@@ -1,10 +1,11 @@
 import numpy as np
-m = 5
-n = 5
-matrix = np.random.randint(1,10,(m,n))
+
+#### 1
 def iteration_GJ(matrix,r,s):
     
     pivot = matrix[r,s]
+    m = len(matrix)
+    n = len(matrix[0])
     for i in range(n) :
         matrix[r,i] = matrix[r,i]/pivot
     for i in range(m) :
@@ -13,7 +14,64 @@ def iteration_GJ(matrix,r,s):
             for j in range(n) :
                 matrix[i,j] = matrix[i,j] - ais*matrix[r,j]
     return matrix
-print(matrix)
-print(iteration_GJ(matrix,2,3))
-k = iteration_GJ(matrix,2,3)
-print(np.linalg.inv(k)) 
+
+
+#### 2 matrice inverse
+def matrice_inverse(A) : 
+    return np.linalg.inv(A)
+
+#### 3 linear system
+
+def linear_system(A,B):
+
+    A = np.array(A)
+    print(A)
+    B = np.array(B)
+    X = np.linalg.inv(A).dot(B)
+
+    print(X)
+
+#### 4_1
+print("\n ########## 4_1 \n")
+A = [[2, 1, 4], [3, 2, 1], [1, 3, 3]]
+B = [16, 10, 16]
+linear_system(A,B)
+
+#### 4_2 
+
+print("\n ########## 4_2 \n")
+A = [[2, 1], [3, 1]]
+print(matrice_inverse(A))
+
+print("\n ########## 4_2 \n")
+
+A = [[2, -1, 0], [-1, 2, -1], [0, -1, 2]]
+print(matrice_inverse(A))
+
+#### 4_3
+print("\n ########## 4_3 \n")
+ 
+A = [[2, -1, 0], [-1, 2, -1], [0, -1, 2]]
+B = [10, -4, 2]
+B = np.array([10, -4, 2])
+x = np.true_divide(A,B)
+print(x)
+
+### 4_4
+print("\n ########## 4_3 (A*A^-1) \n")
+
+w1 = matrice_inverse(A).dot(A)
+w2 = matrice_inverse(A).dot(A)
+
+print(w1)
+print("\n ########## 4_3 (B*B^-1) \n")
+
+print(w2)
+
+
+
+
+
+
+
+

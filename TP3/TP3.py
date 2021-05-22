@@ -1,45 +1,93 @@
-class backpack_object:
- 
-    def __init__(self, weight, utility):
-        self.weight = weight
-        self.utility = utility
- 
-    def __repr__(self):
-        return '{' + str(self.weight) + ', ' + str(self.utility) + '}'
+class noeud : 
+    
+    def __init__(self,fixe):
+        self.gauche = None
+        self.droite = None
+        self.fixe = fixe
+        self.decision = []
+        self.z = None
+    #Q3_1
+    def separer(self) : 
+        
+        if len(self.fixed) != len(self.decision) : 
+            
+            left  = self.fixed_vars
+            right = self.fixed_vars
 
-backpack_objects = [
-    backpack_object(6,12),
-    backpack_object(3,8),
-    backpack_object(9,20),
-    backpack_object(5,9),
-    backpack_object(3,6),
-    backpack_object(7,16),
-]
+            left.append(1)
+            right.append(0)
 
-max_weight = 17
+            self.left = noeud(left)
+            self.right = noeud(right)    
+    #Q3_2
+    def evaluer(self) :
+        poids_max = poids_max
+        decision = []
+        z = 0
 
+        for i in range(len(objets)): 
+             
+            if self.fixe[i] == 1 : 
+                if objets[i].poids > poids_max : 
+                    return
+                poids_max -= objets[i].poids
+                z +=  objets[i].utilite
+            decision.append(self.fixe[i])
+            
 
-### 1st question
-def sorting (backpack_objects) : 
-    backpack_objects.sort(key=lambda x:(x.utility/x.weight), reverse=True)
+        for k in objets[len(self.fixed_vars):] : 
+            if k.poids <= poids_max : 
+                decision.append(1)
+                poids_max -= k.poids
+                z +=  k.utilite
+            
+            else :
+                decision.append(0)
+        self.decision = decision
+        self.z = z
 
+    
 
-### 2nd question
-def initial_solution(backback_objects) : 
-    decision_vars = []
-    left_weight = max_weight
+class objet:
+    
+    def __init__(self,poids,utilite):
+        self.utilite = utilite
+        self.poids = poids
 
-    for object in backback_objects : 
-        if object.weight <= left_weight : 
-            decision_vars.append(1)
-            left_weight = left_weight - object.weight
+objets = []
+
+def ajout_objects() : 
+    
+    for i in range(6):
+        x = int(input("Poids : ")) 
+        y = int(input("Utilité : ")) 
+        objets.append(objet(x,y))
+
+def solution_initiale(objets,poids_max) : 
+    decision = []
+    k = poids_max
+
+    for i in objets : 
+        if i.poids <= k : 
+            decision.append(1)
+            k -= i.poids
         else :
-            decision_vars.append(0)
-    return decision_vars, left_weight
+            decision.append(0)
+    print("les objets sélectionnés : ",decision), 
+    print("le poids des objets: ",poids_max-k)
 
-sorting(backpack_objects)
-decision_vars, z = initial_solution(backpack_objects)
 
-print(decision_vars)
-z = max_weight - z
-print(z)
+def ajout_poids_max() :
+        poids_max = int(input("Donnez le Poids Max du sac-a-dos : ")) 
+        return poids_max
+
+def tri (objets):
+    objets.sort(key = lambda a : (a.utilite/a.poids) , reverse = True)
+
+if __name__ == '__main__':
+    #Q1
+    ajout_objects()
+    tri(objets)
+    poids_max = ajout_poids_max()
+    #Q2
+    solution_initiale(objets,poids_max)

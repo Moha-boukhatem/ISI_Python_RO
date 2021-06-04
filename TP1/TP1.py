@@ -39,11 +39,11 @@ linear_system(A,B)
 
 #### 4_2 
 
-print("\n ########## 4_2 \n")
+print("\n ########## 4_2_B \n")
 A = [[2, 1], [3, 1]]
 print(matrice_inverse(A))
 
-print("\n ########## 4_2 \n")
+print("\n ########## 4_2_A \n")
 
 A = [[2, -1, 0], [-1, 2, -1], [0, -1, 2]]
 print(matrice_inverse(A))
@@ -58,17 +58,15 @@ x = np.true_divide(A,B)
 print(x)
 
 ### 4_4
-print("\n ########## 4_3 (A*A^-1) \n")
+print("\n ########## 4_4_A \n")
 
 w1 = matrice_inverse(A).dot(A)
 w2 = matrice_inverse(A).dot(A)
 
 print(w1)
-print("\n ########## 4_3 (B*B^-1) \n")
+print("\n ########## 4_4_B \n")
 
 print(w2)
-
-
 
 
 

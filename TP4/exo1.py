@@ -11,21 +11,38 @@ class coin :
         self.coinList = ["Face","Pile"]
 
 
-def Question2(object):
+def Question1():
+    
+    nb = choice(dice().diceNumbers)
+
+    print("Le chiffre : ",nb)
+
+
+def Question2():
+    
+    n = int(input("Donner nb du lancement : "))
+    appearance = []
+    
+    for i in range(n):
+        appearance.append(choice(dice().diceNumbers))
+    print("Liste d'apparitions : ",appearance)
+
+
+def appearance(object):
     
     n = int(input("Donner nb du lancement : "))
     appearance = []
     
     for i in range(n):
         appearance.append(choice(object))
-    print("Liste d'apparitions : ",appearance)
     return appearance
 
 
 def Question3():
 
-    nbAppearance = Question2(dice().diceNumbers).count(6)
-    print("Nb d'apparitions du 6  : ",nbAppearance)
+    liste = appearance(dice().diceNumbers)
+    print("liste : ",liste)
+    print("Nb d'apparitions du 6  : ",liste.count(6))
 
 
 def Question4():
@@ -40,20 +57,42 @@ def Question4():
         if nb == 6 :
             break
     print("Liste d'apparitions : ",Q4_Liste)
-    print("Nb de lancements avant obtenir 6 : ",len(Q4_Liste))
+    print("Nb de lancements pour obtenir 6 : ",len(Q4_Liste))
 
 
 def Question5():
-    Question2(coin().coinList)
+    print(appearance(coin().coinList))
+
+def switch_def (choice):
+    
+    if choice == 1:
+        Question1()
+
+    elif choice == 2:
+        Question2()
+    
+    elif choice == 3:
+        Question3()
+
+    elif choice == 4:
+        Question4()
+
+    elif choice == 5:
+        Question5()
+    
+    else : 
+        print("invalid input")
       
-        
+      
 if __name__ == '__main__':
 
-    print("####### Q3")
-    Question3()
-    print("####### Q4")
-    Question4()
-    print("####### Q5")
-    Question5()        
-            
+    print('''
+    1 - Question1()
+    2 - Question2()
+    3 - Question3()
+    4 - Question4()
+    5 - Question5()''')
+    
+    choix = int(input("type the Question : "))
 
+    switch_def(choix)

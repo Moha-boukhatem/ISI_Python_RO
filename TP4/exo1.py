@@ -63,36 +63,44 @@ def Question4():
 def Question5():
     print(appearance(coin().coinList))
 
-def switch_def (choice):
+def switch_def ():
     
-    if choice == 1:
-        Question1()
-
-    elif choice == 2:
-        Question2()
-    
-    elif choice == 3:
-        Question3()
-
-    elif choice == 4:
-        Question4()
-
-    elif choice == 5:
-        Question5()
-    
-    else : 
-        print("invalid input")
-      
-      
-if __name__ == '__main__':
-
-    print('''
+    while True : 
+        print('''
     1 - Question1()
     2 - Question2()
     3 - Question3()
     4 - Question4()
-    5 - Question5()''')
-    
-    choix = int(input("type the Question : "))
+    5 - Question5()
+    6 - Exit''')
 
-    switch_def(choix)
+        choice = int(input("type the Question : "))
+
+        if choice == 1:
+            Question1()
+
+        elif choice == 2:
+            Question2()
+        
+        elif choice == 3:
+            Question3()
+
+        elif choice == 4:
+            Question4()
+
+        elif choice == 5:
+            Question5()
+        
+        elif choice == 6 : 
+            break
+        else : 
+            print("invalid input")
+            
+      
+      
+if __name__ == '__main__':
+
+    
+    
+
+    switch_def()

@@ -1,52 +1,112 @@
 import numpy as np
 
 
-def isVStochastic(vector) : 
+def isVStochastic(nb) : 
     
+    vector = []
+
+    print("##### elements like '0.3','0.2','0.5' ")
+
+    for i in range(nb):
+        element = float(input("element : "))
+        vector.append(element)
+
     vector = np.array(vector)
     somme = np.sum(vector)
     
-    if somme == 1 : 
-        return True    
+    if somme == 1 or somme == 0.9999999999999999 : 
+        return (True,vector)    
     else :
-       return False
+       return (False,vector)
 
 
-def isMStochastic(matrix):
+def isMStochastic():
     
-    liste = []
-    
-    for row in matrix : 
-        liste.append(isVStochastic(row))
+    n = int(input("the matrix dimension : "))
+    listValidation = []
+    matrix = []
 
-    if False in liste :
-        return False
+
+
+    for i in range(n) : 
+        val,vector = isVStochastic(n)
+        listValidation.append(val)
+        matrix.append(vector)
+
+    
+    matrix = np.array(matrix)
+
+    if False in listValidation :
+        return (False,matrix)
     else : 
-        return True
+        return (True,matrix)
 
 
-def CalculMartix(matrix):
+def CalculMartix():
 
-    if isMStochastic(matrix):
-        for row in matrix : 
-            for col in row:
+    neg = False
+    nb = int(input("type M : "))
+    val,matrix = isMStochastic ()
+    
+    if val:
+        for rowPosition,row in enumerate(matrix) : 
+            for colPosition,col in enumerate(row):
                 if col < 0 :
-                    return False
+                    print("negative value in [",rowPosition,",",colPosition,"]")
+                    neg  = True
 
-        return np.dot(matrix,matrix)
-    return False
 
+        if  neg == False :
+            print("\n Matrix : \n")
+            print(matrix)
+            print("\nMatrix ^",nb," : \n")
+            print(np.power(matrix,nb))
+
+    else : 
+        print(matrix," isn't Stochastic")
+
+
+def switch_def ():
+    
+    while True : 
+
+        print('''
+    1 - Vector is Stochastic ()
+    2 - Matrix is Stochastic ()
+    3 - Calcul Martix ()
+    4 - Exit''')
+
+        choice = int(input("type the Question : "))
+
+        if choice == 1:
+            nb = int(input("Nb of vector elements : "))
+            val,vector = isVStochastic(nb)
+
+            if val:
+                print(vector," is Stochastic") 
+            else :
+                print(vector," isn't Stochastic") 
+
+
+        elif choice == 2:
+            val,matrix = isMStochastic()
+
+            if val:
+                print(matrix," is Stochastic") 
+            else :
+                print(matrix," isn't Stochastic") 
+        
+        elif choice == 3:
+
+            CalculMartix()
+
+
+        elif choice == 4 : 
+            break
+        else : 
+            print("invalid input")
+            
 
 if __name__ == "__main__" :
     
-    vector = [1/5,2/10,3/5]
-
-    matrix =  [[3/5,1/5,2/10],
-               [2/10,1/5,3/5],
-               [1/5,6/5,-2/5]]
-
-    rep = isVStochastic(vector)
-    
-    print(isVStochastic(vector))
-    print(isMStochastic(matrix))
-    print(CalculMartix(matrix))
+    switch_def ()
